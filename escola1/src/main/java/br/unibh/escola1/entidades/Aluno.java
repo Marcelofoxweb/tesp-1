@@ -4,12 +4,18 @@ package br.unibh.escola1.entidades;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
@@ -22,9 +28,7 @@ public class Aluno extends Pessoa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@NotBlank
-	@Size(min = 8, max = 8)
-	@Pattern(regexp = "[0-9]*", message = "Informar apenas números.")
+	@NotNull
 	@Column(nullable = false)
 	private Long matricula;
 	
@@ -78,8 +82,10 @@ public class Aluno extends Pessoa implements Serializable{
 
 	@Override
 	public String toString() {
-		return super.toString() + "\nAluno [matricula=" + matricula + ", dataAniversario="
-				+ dataAniversario + "]";
+		return "Aluno [dataAniversario=" + dataAniversario + ", matricula="
+				+ matricula + "]"
+				+ super.toString();
 	}
+	
 
 }

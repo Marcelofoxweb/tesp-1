@@ -8,6 +8,7 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<h:panelGroup id="cadastro">
+		
 			<h:form id="cad" rendered="#{not empty alunomb.aluno}">
 				<rich:panel>
 					<h:outputText value="Cadastro de Alunos"
@@ -18,16 +19,16 @@
 						<h:inputText id="nome" value="#{alunomb.aluno.nome}" size="50" />
 						<h:message for="nome" errorClass="invalid" />
 						<h:outputLabel value="CPF " />
-						<h:inputText id="cof" value="#{alunomb.aluno.cpf}" size="14" />
+						<h:inputText id="cpf" value="#{alunomb.aluno.cpf}" size="14" />
 						<h:message for="cpf" errorClass="invalid" />
 						<h:outputLabel value="Matrícula " />
 						<h:inputText id="matricula" value="#{alunomb.aluno.matricula}"
 							size="10" />
 						<h:message for="matricula" errorClass="invalid" />
-						<h:outputLabel value="Data de Anoversário " />
+						<h:outputLabel value="Data de Aniversário " />
 						<rich:calendar id="dataAniversario"
 							value="#{alunomb.aluno.dataAniversario}" size="10" popup="true"
-							datePattern="d/M/yy" />
+							datePattern="dd/MM/yyyy" />
 						<h:message for="dataAniversario" errorClass="invalid" />
 					</h:panelGrid>
 					<h:commandButton id="gravar" action="#{alunomb.gravar}"
@@ -35,19 +36,28 @@
 					<h:commandButton id="cancelar" action="#{alunomb.cancelar}"
 						value="Cancelar" immediate="true" />
 				</rich:panel>
-			</h:form>
+			</h:form>			
 		</h:panelGroup>
-		<rich:panel>
+		
+		<rich:panel rendered="#{empty alunomb.aluno}">
 			<h:outputText value="Lista de Alunos"
 				style="font-size:15px;font-weight:bold" />
 			<h:form id="arg">
-				<h:outputLabel value="Nome:" />
-				<h:inputText id="nomeArg" value="#{alunomb.nomeArg}" />
-				<h:commandButton id="pesquisar" action="#{alunomb.pesquisar}"
-					value="Pesquisar" render="tabela" />
-				<h:commandButton id="novo" action="#{alunomb.novo}" value="Novo"
-					render="cadastro" />
-			</h:form>
+			
+				<rich:toolbar height="26" itemSeparator="grid">
+					<rich:toolbarGroup>
+						<h:commandButton id="novo" action="#{alunomb.novo}"
+							value="Novo Aluno" render="cadastro" />
+					</rich:toolbarGroup>
+					<rich:toolbarGroup>
+						<h:outputLabel value="Nome:" />
+						<h:inputText id="nomeArg" value="#{alunomb.nomeArg}" />
+						<h:commandButton id="pesquisar" action="#{alunomb.pesquisar}"
+							value="Pesquisar" render="tabela" />
+					</rich:toolbarGroup>
+					
+				</rich:toolbar>
+			</h:form>	
 			<h:panelGroup rendered="#{empty alunomb.alunoes}">
 				<h:outputText value="Nenhum aluno existe" />
 			</h:panelGroup>
