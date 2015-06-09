@@ -10,5 +10,20 @@
 
    <!-- Write your navigation rules here. You are encouraged to use CDI for 
       creating @Named managed beans. -->
+      
+     <converter>
+		<converter-id>ConversorSala</converter-id>
+		<converter-class>br.unibh.escola1.visao.ConversorSala</converter-class>
+	</converter>
+	
+	<converter>
+		<converter-id>ConversorProfessor</converter-id>
+		<converter-class>br.unibh.escola1.visao.ConversorProfessor</converter-class>
+	</converter>
+	
+	<converter>
+		<converter-id>ConversorAluno</converter-id>
+		<converter-class>br.unibh.escola1.visao.ConversorAluno</converter-class>
+	</converter>
 
 </faces-config>

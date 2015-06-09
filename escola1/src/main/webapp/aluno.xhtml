@@ -6,6 +6,8 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
+	
+	
 	<ui:define name="content">
 		<h:panelGroup id="cadastro">
 		
@@ -57,7 +59,10 @@
 					</rich:toolbarGroup>
 					
 				</rich:toolbar>
-			</h:form>	
+			</h:form>
+			
+			
+				
 			<h:panelGroup rendered="#{empty alunomb.alunoes}">
 				<h:outputText value="Nenhum aluno existe" />
 			</h:panelGroup>
@@ -97,6 +102,8 @@
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</rich:column>
+					
+					
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Comandos " />
@@ -113,6 +120,8 @@
 								value="#{aluno.id}" />
 						</h:commandLink>
 					</rich:column>
+					
+					
 				</rich:dataTable>
 			</h:form>
 		</rich:panel>
