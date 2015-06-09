@@ -59,6 +59,7 @@
    <dependencies>
       <!-- Annotation processor to generate the JPA 2.0 metamodel classes 
          for typesafe criteria queries -->
+      
       <dependency>
          <groupId>org.hibernate</groupId>
          <artifactId>hibernate-jpamodelgen</artifactId>
@@ -80,6 +81,10 @@
          <artifactId>seam-solder</artifactId>
          <version>3.0.0.Final</version>
       </dependency>
+      
+      
+      
+      
 
       <!-- JSR-303 (Bean Validation) Implementation -->
       <!-- Provides portable constraints such as @Email -->
@@ -131,6 +136,20 @@
          <type>pom</type>
          <scope>provided</scope>
       </dependency>
+      
+      <!-- Configurando a aplicação para uso do richFaces -->
+      <dependency>
+		 <groupId>org.richfaces</groupId>
+		 <artifactId>richfaces-bom</artifactId>
+		 <version>4.3.7.Final</version>
+		 <scope>import</scope>
+		 <type>pom</type>
+	  </dependency>
+      
+      
+      
+      
+      
    </dependencies>
 
    <build>

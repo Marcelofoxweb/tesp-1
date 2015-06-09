@@ -9,7 +9,11 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@PrimaryKeyJoinColumn
 @Table(name = "TB_PROFESSOR")
+@NamedQueries({ @NamedQuery(name="Professor.findByName", query = "select a from Professor a where a.nome like :nome")
+})
+
 public class Professor extends Pessoa implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

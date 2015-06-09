@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:panelGroup id="cadastro">
+			<h:form id="cad" rendered="#{not empty salamb.sala}">
+				<rich:panel>
+					<h:outputText value="Cadastro de Sala"
+						style="font-size:15px;font-weight:bold" />
+					<rich:messages />
+					<h:panelGrid columns="3">
+						<h:outputLabel value="Código" />
+						<h:inputText id="codigo" value="#{salamb.sala.codigo}" size="50" />
+						<h:message for="codigo" errorClass="invalid" />
+
+						<h:outputLabel value="Capacidade" />
+						<rich:inputNumberSpinner id="capacidade" value="#{salamb.sala.capacidade}"
+							size="50" />
+						<h:message for="capacidade" errorClass="invalid" />
+						
+						
+						<h:outputLabel value="Possui Quadro Branco?" />
+						<h:selectBooleanCheckbox id="possuiQuadroBranco"
+							value="#{salamb.sala.possuiQuadroBranco}">
+							<f:selectItem itemValue="true" itemLabel="Sim" />
+						</h:selectBooleanCheckbox>
+						<h:message for="possuiQuadroBranco" errorClass="invalid" />
+						
+						<h:outputLabel value="Possui DataShow?" />
+						<h:selectBooleanCheckbox id="possuiDataShow"
+							value="#{salamb.sala.possuiDataShow}">
+							<f:selectItem itemValue="true" itemLabel="Sim" />
+						</h:selectBooleanCheckbox>
+						<h:message for="possuiDataShow" errorClass="invalid" />
+						
+						<h:outputLabel value="Possui Computador?" />
+						<h:selectBooleanCheckbox id="possuiComputador"
+							value="#{salamb.sala.possuiComputador}">
+							<f:selectItem itemValue="true" itemLabel="Sim" />
+						</h:selectBooleanCheckbox>
+						<h:message for="possuiComputador" errorClass="invalid" />
+						
+						<h:outputLabel value="Observação" />
+						<h:inputTextarea cols="60" rows="4" id="observacao" value="#{salamb.sala.observacao}"
+							size="50" />
+						<h:message for="observacao" errorClass="invalid" />
+						
+						<h:outputLabel value="Status?" />
+						<h:selectOneRadio id="status"
+							value="#{salamb.sala.status}">
+							<f:selectItem itemValue="1" itemLabel="Ativo" />
+							<f:selectItem itemValue="2" itemLabel="Em manutenção" />
+							<f:selectItem itemValue="3" itemLabel="Desativado" />
+						</h:selectOneRadio>
+						<h:message for="status" errorClass="invalid" />
+
+						
+						<h:outputLabel value="Data do Término da Manutenção" />
+						<rich:calendar id="dataFimManutencao"
+							value="#{salamb.sala.dataTerminoManutencao}" size="10" popup="true"
+							datePattern="dd/MM/yyyy" />
+						<h:message for="dataFimManutencao" errorClass="invalid" />
+
+					</h:panelGrid>
+					<h:commandButton id="gravar" action="#{salamb.gravar}"
+						value="Gravar" />
+					<h:commandButton id="cancelar" action="#{salamb.cancelar}"
+						value="Cancelar" immediate="true" />
+				</rich:panel>
+			</h:form>
+		</h:panelGroup>
+		
+		
+		<rich:panel rendered="#{empty salamb.sala}">
+				<h:outputText value="Lista de Salas"
+				style="font-size:15px;font-weight:bold" />
+			<h:form id="arg">
+				<rich:toolbar height="26" itemSeparator="grid">
+					<rich:toolbarGroup>
+						<h:commandButton id="novo" action="#{salamb.novo}"
+							value="Nova Sala" render="cadastro" />
+					</rich:toolbarGroup>
+					<rich:toolbarGroup>
+						<h:outputLabel value="Capacidade:" />
+						<h:inputText id="nomeArg" value="#{salamb.nomeArg}" />
+						<h:commandButton id="pesquisar" action="#{salamb.pesquisar}"
+							value="Pesquisar" render="tabela" />
+					</rich:toolbarGroup>
+				</rich:toolbar>
+			</h:form>
+			<h:panelGroup rendered="#{empty salamb.salaes}">
+				<h:outputText value="Nenhuma sala existe" />
+			</h:panelGroup>
+			<h:form id="edt">
+				<rich:dataTable id="tabela" var="salaloop" value="#{salamb.salaes}"
+					rendered="#{not empty salamb.salaes}"
+					onrowclick="selectRow('#{salaloop.codigo}')">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{salaloop.id}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Código" />
+						</f:facet>
+						<h:outputText value="#{salaloop.codigo}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Capacidade" />
+						</f:facet>
+						<h:outputText value="#{salaloop.capacidade}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Possui Quadro Branco?" />
+						</f:facet>
+						<h:outputText value="#{salaloop.possuiQuadroBranco==true?'Sim':'Não'}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Possui DataShow?" />
+						</f:facet>
+						<h:outputText value="#{salaloop.possuiDataShow==true?'Sim':'Não'}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Possui Computador?" />
+						</f:facet>
+						<h:outputText value="#{salaloop.possuiComputador==true?'Sim':'Não'}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Status" />
+						</f:facet>
+						
+						<h:outputText value="Ativo" rendered="#{salaloop.status==1}" />    
+						<h:outputText value="Em Manutenção" rendered="#{salaloop.status==2}" />    
+						<h:outputText value="Desativo" rendered="#{salaloop.status==3}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Data Término da Manutenção " />
+						</f:facet>
+						<h:outputText value="#{salaloop.dataTerminoManutencao}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</rich:column>
+					
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Comandos " />
+						</f:facet>
+						<h:commandLink id="editar" action="#{salamb.editar}"
+							value="Editar">
+							<f:setPropertyActionListener target="#{salamb.id}"
+								value="#{salaloop.id}" />
+						</h:commandLink>
+						<h:outputText value=" " />
+						<h:commandLink id="excluir" action="#{salamb.excluir}"
+							value="Excluir" render="tabela">
+							<f:setPropertyActionListener target="#{salamb.id}"
+								value="#{salaloop.id}" />
+						</h:commandLink>
+					</rich:column>
+				</rich:dataTable>
+			</h:form>
+		</rich:panel>
+	</ui:define>
+</ui:composition>
